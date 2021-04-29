@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.distirbuteLock.dao.DistributeLockMapper">
+  <resultMap id="BaseResultMap" type="com.study.distirbuteLock.model.DistributeLock">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="bussiness_code" jdbcType="VARCHAR" property="bussinessCode" />
+    <result column="business_name" jdbcType="VARCHAR" property="businessName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, bussiness_code, business_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from distirbute_lock
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from distirbute_lock
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.study.distirbuteLock.model.DistributeLock">
+    insert into distirbute_lock (id, bussiness_code, business_name
+      )
+    values (#{id,jdbcType=INTEGER}, #{bussinessCode,jdbcType=VARCHAR}, #{businessName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.study.distirbuteLock.model.DistributeLock">
+    insert into distirbute_lock
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bussinessCode != null">
+        bussiness_code,
+      </if>
+      <if test="businessName != null">
+        business_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bussinessCode != null">
+        #{bussinessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessName != null">
+        #{businessName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.study.distirbuteLock.model.DistributeLock">
+    update distirbute_lock
+    <set>
+      <if test="bussinessCode != null">
+        bussiness_code = #{bussinessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessName != null">
+        business_name = #{businessName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.study.distirbuteLock.model.DistributeLock">
+    update distirbute_lock
+    set bussiness_code = #{bussinessCode,jdbcType=VARCHAR},
+      business_name = #{businessName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectDistributeLock" resultType="com.study.distirbuteLock.model.DistributeLock">
+    select * from distirbute_lock
+    where bussiness_code = #{bussinessCode,jdbcType=VARCHAR}
+    for update
+  </select>
+</mapper>
