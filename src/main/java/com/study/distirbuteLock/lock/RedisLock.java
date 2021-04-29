@@ -56,7 +56,8 @@ public class RedisLock implements AutoCloseable{
      */
     public boolean unLock(){
         //LUA脚本
-        String script = "if redis.call(\"get\",KEYS[1]) == ARGV[1] then\n" +
+        String script =
+                "if redis.call(\"get\",KEYS[1]) == ARGV[1] then\n" +
                 "\t\treturn redis.call(\"del\",KEYS[1])\n" +
                 "\telse\n" +
                 "\t\treturn 0\n" +

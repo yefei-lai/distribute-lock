@@ -1,0 +1,19 @@
+# Created by .ignore support plugin (hsz.mobi)
+/target
+.classpath
+.settings
+.project
+*.iml
+.idea
+log.txt
+logs
+log.*
+*DS_Store
+/src/main/resources/*.properties
+/src/main/resources/appConfig.xml
+mm-rest.properties
+mm-rest.properties.lock
+/bin
+/src/main/resources/mission.xml
+src/test/
+target/generated-sources/
